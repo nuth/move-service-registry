@@ -16,6 +16,7 @@ import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequestMapping("/organization")
 @RestController
 public class OrganisationController {
 
@@ -27,12 +28,12 @@ public class OrganisationController {
     @Autowired
     ELMALookupService elmaLookupSerice;
 
-    @RequestMapping("/canreceive/{orgnr}")
+    @RequestMapping("/{orgnr}/canreceive")
     public void canReceive(@PathVariable("orgnr") String orgnr) {
         virkSertService.getCertificate(orgnr);
     }
 
-    @RequestMapping("/info/{orgnr}")
+    @RequestMapping("/{orgnr}/info")
     public List<Entry> info(@PathVariable("orgnr") String orgnr) {
         try {
             Certificate certificate = virkSertService.getCertificate(orgnr);
