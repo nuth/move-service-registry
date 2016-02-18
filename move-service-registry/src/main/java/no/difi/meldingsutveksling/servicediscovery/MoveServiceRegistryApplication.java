@@ -1,12 +1,11 @@
-package no.difi.meldingsutveksling.adresseregister;
+package no.difi.meldingsutveksling.servicediscovery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MoveServiceRegistryApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(MoveServiceRegistryApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MoveServiceRegistryApplication.class, args);
+    }
 }

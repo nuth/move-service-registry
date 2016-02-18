@@ -1,4 +1,4 @@
-package no.difi.meldingsutveksling.adresseregister.model;
+package no.difi.meldingsutveksling.servicediscovery.model;
 
 public class Entry {
 
