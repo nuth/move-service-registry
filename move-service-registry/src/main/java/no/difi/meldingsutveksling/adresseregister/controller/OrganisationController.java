@@ -1,6 +1,6 @@
 package no.difi.meldingsutveksling.adresseregister.controller;
 
-import model.Entry;
+import no.difi.meldingsutveksling.adresseregister.model.Entry;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
