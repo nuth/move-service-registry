@@ -7,7 +7,6 @@ import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
 
 public class StringConvertingCertificateWrapper {
 
