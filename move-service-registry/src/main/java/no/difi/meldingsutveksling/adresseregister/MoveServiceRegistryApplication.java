@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MoveAdresseregisterApplication {
+public class MoveServiceRegistryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MoveAdresseregisterApplication.class, args);
+		SpringApplication.run(MoveServiceRegistryApplication.class, args);
 	}
 }
