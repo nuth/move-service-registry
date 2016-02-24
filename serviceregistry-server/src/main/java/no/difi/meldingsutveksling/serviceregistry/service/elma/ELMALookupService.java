@@ -1,12 +1,12 @@
 package no.difi.meldingsutveksling.serviceregistry.service.elma;
 
-
 import no.difi.meldingsutveksling.serviceregistry.common.ServiceDiscoveryException;
 import no.difi.vefa.peppol.common.api.EndpointNotFoundException;
 import no.difi.vefa.peppol.common.model.*;
 import no.difi.vefa.peppol.lookup.LookupClient;
 import no.difi.vefa.peppol.lookup.api.LookupException;
-import no.difi.vefa.peppol.security.api.SecurityException;
+
+import no.difi.vefa.peppol.security.api.PeppolSecurityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +31,7 @@ public class ELMALookupService {
                     DOCUMENT_IDENTIFIER,
                     PROCESS_IDENTIFIER,
                     transportProfile);
-        } catch (SecurityException | EndpointNotFoundException e) {
+        } catch (PeppolSecurityException | EndpointNotFoundException e) {
             throw new ServiceDiscoveryException(e);
         }
     }
