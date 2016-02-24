@@ -1,6 +1,5 @@
-package no.difi.meldingsutveksling.servicediscovery.controller;
+package no.difi.meldingsutveksling.serviceregistry.controller;
 
-import no.difi.virksert.client.VirksertClientException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

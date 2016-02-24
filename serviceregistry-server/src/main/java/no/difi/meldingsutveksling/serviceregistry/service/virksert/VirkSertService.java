@@ -1,7 +1,7 @@
-package no.difi.meldingsutveksling.servicediscovery.service.virksert;
+package no.difi.meldingsutveksling.serviceregistry.service.virksert;
 
 
-import no.difi.meldingsutveksling.servicediscovery.controller.NotFoundException;
+import no.difi.meldingsutveksling.serviceregistry.controller.NotFoundException;
 import no.difi.virksert.client.VirksertClient;
 import no.difi.virksert.client.VirksertClientBuilder;
 import no.difi.virksert.client.VirksertClientException;
@@ -30,15 +30,11 @@ public class VirkSertService {
     @PostConstruct
     public void init() {
         virksertClient = VirksertClientBuilder.newInstance()
-                .setScope("no.difi.meldingsutveksling.servicediscovery.service.virksert.DemoScope")
+                .setScope("no.difi.meldingsutveksling.serviceregistry.service.virksert.DemoScope")
                 .setUri(environment.getProperty("adresseregister.endPointURL")).build();
     }
 
-    public Certificate getCertificate(String orgNumber) {
-        try {
-            return virksertClient.fetch(orgNumber);
-        } catch (VirksertClientException e) {
-            throw new NotFoundException(e);
-        }
+    public Certificate getCertificate(String orgNumber) throws VirksertClientException {
+        return virksertClient.fetch(orgNumber);
     }
 }

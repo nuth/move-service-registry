@@ -1,4 +1,4 @@
-package no.difi.meldingsutveksling.servicediscovery.service.elma;
+package no.difi.meldingsutveksling.serviceregistry.service.elma;
 
 import no.difi.vefa.peppol.common.model.TransportProfile;
 import no.difi.vefa.peppol.lookup.LookupClient;

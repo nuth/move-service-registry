@@ -1,6 +1,6 @@
-package no.difi.meldingsutveksling.servicediscovery.service.virksert;
+package no.difi.meldingsutveksling.serviceregistry.service.virksert;
 
-import no.difi.meldingsutveksling.servicediscovery.ServiceDiscoveryException;
+import no.difi.meldingsutveksling.serviceregistry.common.ServiceDiscoveryException;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
 

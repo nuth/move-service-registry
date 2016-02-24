@@ -1,4 +1,4 @@
-package no.difi.meldingsutveksling.servicediscovery.service.virksert;
+package no.difi.meldingsutveksling.serviceregistry.service.virksert;
 
 import no.difi.certvalidator.api.CertificateBucketException;
 import no.difi.certvalidator.util.KeyStoreCertificateBucket;

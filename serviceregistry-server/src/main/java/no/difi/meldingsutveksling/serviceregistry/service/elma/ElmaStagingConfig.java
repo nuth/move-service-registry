@@ -1,4 +1,4 @@
-package no.difi.meldingsutveksling.servicediscovery.service.elma;
+package no.difi.meldingsutveksling.serviceregistry.service.elma;
 
 import no.difi.vefa.peppol.common.model.TransportProfile;
 import no.difi.vefa.peppol.lookup.LookupClient;
@@ -7,9 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile({"production", "staging"})
+/**
+ * @author Glenn Bech
+ */
+@Profile({"staging"})
 @Configuration
-public class ElmaProdConfig {
+public class ElmaStagingConfig {
     public static final String ELMA_ENDPOINT_KEY = "bdxr-transport-altinn";
     private static final TransportProfile TRANSPORT_PROFILE_ALTINN = new TransportProfile(ELMA_ENDPOINT_KEY);
 
@@ -20,6 +23,6 @@ public class ElmaProdConfig {
 
     @Bean
     public LookupClient getElmaLookupClient() {
-        return LookupClientBuilder.forProduction().build();
+        return LookupClientBuilder.forTest().endpointCertificateValidator(null).providerCertificateValidator(null).build();
     }
 }
