@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/service-registry-client/service-registry-client.iml" filepath="$PROJECT_DIR$/service-registry-client/service-registry-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-registry-parent.iml" filepath="$PROJECT_DIR$/service-registry-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/move-service-registry/serviceregistry.iml" filepath="$PROJECT_DIR$/move-service-registry/serviceregistry.iml" />
+    </modules>
+  </component>
+</project>
