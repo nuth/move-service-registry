@@ -1,13 +1,16 @@
 package no.difi.meldingsutveksling.serviceregistry.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class ServiceRecord implements Serializable {
 
     private String serviceIdentifier;
     private String organisationNumber;
     private String x509Certificate;
-    private String payloadIdentifier;
     private String endPointURL;
 
     public ServiceRecord(String serviceIdentifier, String organisationNumber, String x509Certificate
@@ -15,7 +18,6 @@ public class ServiceRecord implements Serializable {
 
         this.organisationNumber = organisationNumber;
         this.x509Certificate = x509Certificate;
-        this.payloadIdentifier = payloadIdentifier;
         this.endPointURL = endPointURL;
         this.serviceIdentifier = serviceIdentifier;
     }
@@ -37,14 +39,6 @@ public class ServiceRecord implements Serializable {
 
     public void setX509Certificate(String x509Certificate) {
         this.x509Certificate = x509Certificate;
-    }
-
-    public String getPayloadIdentifier() {
-        return payloadIdentifier;
-    }
-
-    public void setPayloadIdentifier(String payloadIdentifier) {
-        this.payloadIdentifier = payloadIdentifier;
     }
 
     public String getEndPointURL() {
@@ -69,7 +63,6 @@ public class ServiceRecord implements Serializable {
                 "serviceIdentifier='" + serviceIdentifier + '\'' +
                 ", organisationNumber='" + organisationNumber + '\'' +
                 ", x509Certificate='" + x509Certificate + '\'' +
-                ", payloadIdentifier='" + payloadIdentifier + '\'' +
                 ", endPointURL='" + endPointURL + '\'' +
                 '}';
     }
