@@ -5,6 +5,7 @@ import no.difi.meldingsutveksling.serviceregistry.common.InfoRecord;
 import no.difi.meldingsutveksling.serviceregistry.common.Organization;
 import no.difi.meldingsutveksling.serviceregistry.common.ServiceRecord;
 import no.difi.meldingsutveksling.serviceregistry.service.elma.ELMALookupService;
+import no.difi.meldingsutveksling.serviceregistry.service.ks.KSLookup;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.StringConvertingCertificateWrapper;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
 import no.difi.vefa.peppol.common.model.Endpoint;
@@ -31,14 +32,16 @@ public class OrganisationController {
     public static final String NORWAY_PREFIX = "9908:";
     public static final String EDU = "EDU";
     public static final String POST_TIL_VIRKSOMHET = "POST_TIL_VIRKSOMHET";
-    public static final String FIKS = "FIKS";
+
 
     @Autowired
-    VirkSertService virkSertService;
+    private VirkSertService virkSertService;
 
     @Autowired
-    ELMALookupService elmaLookupSerice;
+    private ELMALookupService elmaLookupSerice;
 
+    @Autowired
+    private KSLookup ksLookup;
 
     @RequestMapping("/{orgnr}")
     @ResponseBody
@@ -48,7 +51,7 @@ public class OrganisationController {
         try {
             org.addServiceRecord(createEDUServiceRecord(orgnr));
             org.addServiceRecord(createPostToCompanyServiceRecord(orgnr));
-            org.addServiceRecord(createFiksService(orgnr));
+            org.addServiceRecord(createFiksServiceRecord(orgnr));
             InfoRecord infoRecord = new InfoRecord(primaryServiceMap.get(orgnr) == null ? ""
                     : EDU.equals(primaryServiceMap.get(orgnr)) ? EDU
                     : FIKS.equals(primaryServiceMap.get(orgnr)) ? FIKS
@@ -78,9 +81,10 @@ public class OrganisationController {
         return new ServiceRecord(POST_TIL_VIRKSOMHET, orgnr, StringConvertingCertificateWrapper.toString(certificate), null, "http://postkasse.altinn.no");
     }
 
-    private ServiceRecord createFiksService(String orgnr) throws VirksertClientException {
-        Certificate certificate = virkSertService.getCertificate(orgnr);
-        return new ServiceRecord(FIKS, " 971032146", StringConvertingCertificateWrapper.toString(certificate), null, "http://integrasjon.fiks.no");
+    private ServiceRecord createFiksServiceRecord(String orgnr) throws VirksertClientException {
+        String returnedOrganisationNumber = ksLookup.mapOrganisationNumber(orgnr);
+        Certificate certificate = virkSertService.getCertificate(returnedOrganisationNumber);
+        return new ServiceRecord(FIKS, returnedOrganisationNumber, StringConvertingCertificateWrapper.toString(certificate), null, "http://integrasjon.fiks.no");
     }
 
     @RequestMapping("/primary")
