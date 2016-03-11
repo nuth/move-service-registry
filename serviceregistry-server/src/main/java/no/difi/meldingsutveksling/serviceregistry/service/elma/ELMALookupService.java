@@ -1,6 +1,6 @@
 package no.difi.meldingsutveksling.serviceregistry.service.elma;
 
-import no.difi.meldingsutveksling.serviceregistry.ServiceDiscoveryException;
+import no.difi.meldingsutveksling.serviceregistry.ServiceRegistryException;
 import no.difi.vefa.peppol.common.api.EndpointNotFoundException;
 import no.difi.vefa.peppol.common.model.*;
 import no.difi.vefa.peppol.lookup.LookupClient;
@@ -32,7 +32,7 @@ public class ELMALookupService {
                     PROCESS_IDENTIFIER,
                     transportProfile);
         } catch (PeppolSecurityException | EndpointNotFoundException e) {
-            throw new ServiceDiscoveryException(e);
+            throw new ServiceRegistryException(e);
         }
     }
 }

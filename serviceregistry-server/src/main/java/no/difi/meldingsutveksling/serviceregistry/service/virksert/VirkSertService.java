@@ -1,7 +1,6 @@
 package no.difi.meldingsutveksling.serviceregistry.service.virksert;
 
 
-import no.difi.meldingsutveksling.serviceregistry.controller.NotFoundException;
 import no.difi.virksert.client.VirksertClient;
 import no.difi.virksert.client.VirksertClientBuilder;
 import no.difi.virksert.client.VirksertClientException;

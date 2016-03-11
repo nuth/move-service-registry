@@ -30,7 +30,7 @@ public abstract class ServiceRecord implements Serializable {
 
     public abstract String getX509Certificate();
 
-    public abstract URL getEndPointURL();
+    public abstract String getEndPointURL();
 
     public ServiceIdentifier getServiceIdentifier() {
         return serviceIdentifier;

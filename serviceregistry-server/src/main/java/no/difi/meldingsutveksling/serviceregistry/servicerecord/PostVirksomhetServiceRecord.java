@@ -2,7 +2,6 @@ package no.difi.meldingsutveksling.serviceregistry.servicerecord;
 
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.net.URL;
 
@@ -25,7 +24,7 @@ public class PostVirksomhetServiceRecord extends ServiceRecord {
     }
 
     @Override
-    public URL getEndPointURL() {
+    public String getEndPointURL() {
         return null;
     }
 }

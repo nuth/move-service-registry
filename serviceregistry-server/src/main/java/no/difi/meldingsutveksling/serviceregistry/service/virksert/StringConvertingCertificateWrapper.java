@@ -1,6 +1,6 @@
 package no.difi.meldingsutveksling.serviceregistry.service.virksert;
 
-import no.difi.meldingsutveksling.serviceregistry.ServiceDiscoveryException;
+import no.difi.meldingsutveksling.serviceregistry.ServiceRegistryException;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
 
@@ -19,7 +19,7 @@ public class StringConvertingCertificateWrapper {
             jcaPEMWriter.flush();
             return stringWriter.toString();
         } catch (IOException e) {
-            throw new ServiceDiscoveryException(e);
+            throw new ServiceRegistryException(e);
         } finally {
             IOUtils.closeQuietly(jcaPEMWriter);
             IOUtils.closeQuietly(stringWriter);
