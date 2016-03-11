@@ -1,5 +1,6 @@
 package no.difi.meldingsutveksling.serviceregistry.service.ks;
 
+
 public interface KSLookup {
 
     /**
@@ -15,5 +16,4 @@ public interface KSLookup {
      * @return
      */
     String mapOrganisationNumber(String organisatioNumber);
-
 }

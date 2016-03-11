@@ -10,10 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>serviceregistry-client</module>
         <module>serviceregistry-server</module>
-        <module>serviceregistry-common</module>
     </modules>
+
     <build>
         <plugins>
             <plugin>

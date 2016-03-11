@@ -1,4 +1,7 @@
-package no.difi.meldingsutveksling.serviceregistry.common;
+package no.difi.meldingsutveksling.serviceregistry.model;
+
+
+import no.difi.meldingsutveksling.serviceregistry.servicerecord.ServiceRecord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +9,7 @@ import java.util.List;
 
 public class Organization {
 
-    private InfoRecord info;
+    private OrganizationInfo info;
     private List<ServiceRecord> serviceRecords;
 
     public Organization() {
@@ -17,11 +20,11 @@ public class Organization {
         serviceRecords.add(s);
     }
 
-    public InfoRecord getInfo() {
+    public OrganizationInfo getInfo() {
         return info;
     }
 
-    public void setInfo(InfoRecord info) {
+    public void setInfo(OrganizationInfo info) {
         this.info = info;
     }
 

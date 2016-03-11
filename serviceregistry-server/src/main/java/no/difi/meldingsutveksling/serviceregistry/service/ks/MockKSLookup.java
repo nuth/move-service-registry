@@ -1,6 +1,7 @@
 package no.difi.meldingsutveksling.serviceregistry.service.ks;
 
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.List;
 /**
  * Change this when a lookup service is available for KS
  */
-@Profile({"dev,systest,itest,staging"})
+@Component
+@Profile({"dev","systest","itest","staging"})
 public class MockKSLookup implements KSLookup {
 
     private static final String KS_ORGNR = "910076787";
@@ -21,7 +23,7 @@ public class MockKSLookup implements KSLookup {
 
     @Override
     public boolean isKSManaged(String organisationNumber) {
-        return organisationNumber.contains(organisationNumber);
+        return orgNumberstoreplaceWithKS.contains(organisationNumber);
     }
 
     @Override

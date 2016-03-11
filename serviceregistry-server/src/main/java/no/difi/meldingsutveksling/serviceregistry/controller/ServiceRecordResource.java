@@ -2,7 +2,7 @@ package no.difi.meldingsutveksling.serviceregistry.controller;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import no.difi.meldingsutveksling.serviceregistry.common.ServiceRecord;
+import no.difi.meldingsutveksling.serviceregistry.servicerecord.ServiceRecord;
 import org.springframework.hateoas.ResourceSupport;
 
 public class ServiceRecordResource extends ResourceSupport {
@@ -11,7 +11,6 @@ public class ServiceRecordResource extends ResourceSupport {
     @JsonCreator
     public ServiceRecordResource(@JsonProperty("servicerecord") ServiceRecord serviceRecord) {
         this.serviceRecord = serviceRecord;
-
     }
 
     public ServiceRecord getServiceRecord() {

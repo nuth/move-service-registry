@@ -1,4 +1,4 @@
-package no.difi.meldingsutveksling.serviceregistry.common;
+package no.difi.meldingsutveksling.serviceregistry;
 
 public class ServiceDiscoveryException extends RuntimeException {
     public ServiceDiscoveryException(Exception e) {
