@@ -1,7 +1,7 @@
 package no.difi.meldingsutveksling.serviceregistry.service.elma;
 
 import no.difi.meldingsutveksling.serviceregistry.ServiceDiscoveryException;
-import no.difi.vefa.peppol.common.api.EndpointNotFoundException;
+import no.difi.vefa.peppol.common.lang.EndpointNotFoundException;
 import no.difi.vefa.peppol.common.model.*;
 import no.difi.vefa.peppol.lookup.LookupClient;
 import no.difi.vefa.peppol.lookup.api.LookupException;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class ELMALookupService {
 
     private static final ProcessIdentifier PROCESS_IDENTIFIER = new ProcessIdentifier("urn:www.difi.no:profile:meldingsutveksling:ver1.0");
-    private static final DocumentIdentifier DOCUMENT_IDENTIFIER = new DocumentIdentifier("urn:no:difi:meldingsuveksling:xsd::Melding##urn:www.difi.no:meldingsutveksling:melding:1.0:extended:urn:www.difi.no:encoded:aes-zip:1.0::1.0");
+    private static final DocumentTypeIdentifier DOCUMENT_IDENTIFIER = new DocumentTypeIdentifier("urn:no:difi:meldingsuveksling:xsd::Melding##urn:www.difi.no:meldingsutveksling:melding:1.0:extended:urn:www.difi.no:encoded:aes-zip:1.0::1.0");
 
     private LookupClient lookupClient;
     private TransportProfile transportProfile;
@@ -31,7 +31,7 @@ public class ELMALookupService {
                     DOCUMENT_IDENTIFIER,
                     PROCESS_IDENTIFIER,
                     transportProfile);
-        } catch (PeppolSecurityException | EndpointNotFoundException e) {
+        } catch (EndpointNotFoundException | PeppolSecurityException e) {
             throw new ServiceDiscoveryException(e);
         }
     }
