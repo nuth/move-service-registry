@@ -20,6 +20,11 @@ public class OrganizationResource extends ResourceSupport {
     private Organization organization;
 
 
+    /**
+     * Creates a resource object that will be returned to the REST client, based the the domain object
+     *
+     * @param organization the domain object to be used to creat this REST resource
+     */
     @JsonCreator
     public OrganizationResource(@JsonProperty("organization") Organization organization) {
         this.organization = organization;

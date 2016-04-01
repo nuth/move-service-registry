@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.security.cert.Certificate;
 
-public class StringConvertingCertificateWrapper {
+public class CertificateToString {
 
     public static String toString(Certificate certificate) {
         StringWriter stringWriter = new StringWriter();

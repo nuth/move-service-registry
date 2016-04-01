@@ -44,7 +44,7 @@ public class OrganisationController {
         final OrganizationInfo info = new OrganizationInfo(orgnr, identifier);
         org.setInfo(info);
         org.addServiceRecord(new EDUServiceRecord(virkSertService, elmaLookupSerice, orgnr));
-       // org.addServiceRecord(new PostVirksomhetServiceRecord(virkSertService, orgnr));
+        org.addServiceRecord(new PostVirksomhetServiceRecord(virkSertService, orgnr));
         OrganizationResource organizationRes = new OrganizationResource(org);
         return new ResponseEntity<>(organizationRes, HttpStatus.OK);
     }

@@ -2,6 +2,7 @@ package no.difi.meldingsutveksling.serviceregistry.servicerecord;
 
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.net.URL;
 
@@ -20,11 +21,16 @@ public class PostVirksomhetServiceRecord extends ServiceRecord {
 
     @Override
     public String getX509Certificate() {
-        return null;
+        try {
+            Certificate c = virkSertService.getCertificate(getOrganisationNumber());
+            return CertificateToString.toString(c);
+        } catch (VirksertClientException e) {
+            throw new ResourceNotFoundException(e);
+        }
     }
 
     @Override
-    public String getEndPointURL() {
+    public URL getEndPointURL() {
         return null;
     }
 }

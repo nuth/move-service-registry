@@ -1,11 +1,10 @@
 package no.difi.meldingsutveksling.serviceregistry.servicerecord;
 
-import no.difi.meldingsutveksling.serviceregistry.ServiceRegistryException;
-import no.difi.meldingsutveksling.serviceregistry.service.elma.ELMALookupService;
-import no.difi.meldingsutveksling.serviceregistry.service.virksert.StringConvertingCertificateWrapper;
+import no.difi.meldingsutveksling.serviceregistry.ResourceNotFoundException;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
-import no.difi.vefa.peppol.lookup.api.LookupException;
-import no.difi.virksert.client.VirksertClientException;
+import no.difi.vefa.peppol.common.model.Endpoint;
+
+import java.net.URL;
 
 import static no.difi.meldingsutveksling.serviceregistry.model.ServiceIdentifier.EDU;
 
@@ -13,9 +12,7 @@ public class EDUServiceRecord extends ServiceRecord {
 
     private VirkSertService virkSertService;
 
-    private ELMALookupService elmaLookupService;
-
-    public EDUServiceRecord(VirkSertService virkSertService, ELMALookupService elmaLookupService, String orgnr) {
+    public EDUServiceRecord(VirkSertService virkSertService, String orgnr) {
         super(EDU, orgnr);
         this.virkSertService = virkSertService;
         this.elmaLookupService = elmaLookupService;
@@ -24,19 +21,22 @@ public class EDUServiceRecord extends ServiceRecord {
     @Override
     public String getX509Certificate() {
         try {
-            return StringConvertingCertificateWrapper.toString(
-                    virkSertService.getCertificate(getOrganisationNumber()));
+            Certificate c = virkSertService.getCertificate(getOrganisationNumber());
+            return CertificateToString.toString(c);
         } catch (VirksertClientException e) {
-            throw new ServiceRegistryException(e);
+            throw new ResourceNotFoundException(e);
         }
     }
+'
 
-    @Override
-    public String getEndPointURL() {
+    public URL getEndPointURL() {
+
         try {
-            return elmaLookupService.lookup(getOrganisationNumber()).getAddress() ;
-        } catch (LookupException e) {
-            throw new ServiceRegistryException(e);
+            Endpoint ep = elmaLookupService.lookup(getOrganisationNumber());
+            return new URL(ep.getAddress());
+
+        } catch (LookupException | MalformedURLException e) {
+            throw new ServiceDiscoveryException(e);
         }
     }
 }
