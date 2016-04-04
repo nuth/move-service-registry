@@ -13,5 +13,8 @@ public enum ServiceIdentifier {
     }
 
 
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

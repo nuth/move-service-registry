@@ -6,6 +6,7 @@ import no.difi.meldingsutveksling.serviceregistry.servicerecord.ServiceRecord;
 import org.springframework.hateoas.ResourceSupport;
 
 public class ServiceRecordResource extends ResourceSupport {
+
     private ServiceRecord serviceRecord;
 
     @JsonCreator

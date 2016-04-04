@@ -1,10 +1,12 @@
 package no.difi.meldingsutveksling.serviceregistry.servicerecord;
 
+import no.difi.meldingsutveksling.serviceregistry.ResourceNotFoundException;
+import no.difi.meldingsutveksling.serviceregistry.service.virksert.CertificateToString;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
+import no.difi.virksert.client.VirksertClientException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import java.net.URL;
+import java.security.cert.Certificate;
 
 import static no.difi.meldingsutveksling.serviceregistry.model.ServiceIdentifier.POST_VIRKSOMHET;
 
@@ -30,7 +32,7 @@ public class PostVirksomhetServiceRecord extends ServiceRecord {
     }
 
     @Override
-    public URL getEndPointURL() {
-        return null;
+    public String getEndPointURL() {
+        return "http://www.altinn.no";
     }
 }
