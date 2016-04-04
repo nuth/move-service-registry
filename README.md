@@ -12,9 +12,9 @@ http://localhost:8080/organization/986186999
 
 ## Example response
 
-# The response always has an Information record. The information record says what channel the organization wants messages sent over (POST VIRKSOMHET, EDU etc)
-# The response has 1..N ServiceRecords. Each Service record represents one channel the organisation can receive messages over. For each ServiceRecord there is a certificate, EndPoint and organzation number.
-# The sender can not use the receivers organization number blindly. The sender must always use the organisation number in the relevant ServiceRecord. This is because the message might be   
+* The response always has an Information record. The information record says what channel the organization wants messages sent over (POST VIRKSOMHET, EDU etc)
+* The response has 1..N ServiceRecords. Each Service record represents one channel the organisation can receive messages over. For each ServiceRecord there is a certificate, EndPoint and organzation number.
+* The sender can not use the receivers organization number blindly. The sender must always use the organisation number in the relevant ServiceRecord. This is because the message might be   
 
 ```json
 {
