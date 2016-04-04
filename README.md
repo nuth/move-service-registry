@@ -52,5 +52,17 @@ http://localhost:8080/organization/986186999
   }
 } 
 ```
+# How to change the primary service for an organisation
 
+Every service record has a link that can be used to set it as the primary. Look for this part of the JSON response and 
+copy the URL directly into a Browser of REST client
+
+```json
+  "_links": {
+        "setprimary": {
+          "href": "http://localhost:8080/organization/primary?orgnr=986186999&serviceidentifier=POST_VIRKSOMHET"
+        }
+      }
+    ```
+    
 
