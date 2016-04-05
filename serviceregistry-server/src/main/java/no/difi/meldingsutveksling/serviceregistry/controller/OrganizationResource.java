@@ -31,7 +31,7 @@ public class OrganizationResource extends ResourceSupport {
         serviceRecords = new ArrayList<>();
         for (ServiceRecord r : organization.getServiceRecords()) {
             final ServiceRecordResource e = new ServiceRecordResource(r);
-            final Object invocationValue = methodOn(OrganisationController.class).setPrimary(organization.getInfo().getOrganisationNumber(),
+            final Object invocationValue = methodOn(OrganizationController.class).setPrimary(organization.getInfo().getOrganisationNumber(),
                     r.getServiceIdentifier().getName());
             e.add(linkTo(invocationValue).withRel("setprimary"));
             serviceRecords.add(e);

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/organization")
 @ExposesResourceFor(OrganizationResource.class)
 @RestController
-public class OrganisationController {
+public class OrganizationController {
 
     private VirkSertService virkSertService;
     private ELMALookupService elmaLookupSerice;
@@ -28,7 +28,7 @@ public class OrganisationController {
     private PrimaryServiceStore store;
 
     @Autowired
-    public OrganisationController(VirkSertService virkSertService, ELMALookupService elmaLookupSerice, KSLookup ksLookup, PrimaryServiceStore store) {
+    public OrganizationController(VirkSertService virkSertService, ELMALookupService elmaLookupSerice, KSLookup ksLookup, PrimaryServiceStore store) {
         this.virkSertService = virkSertService;
         this.elmaLookupSerice = elmaLookupSerice;
         this.ksLookup = ksLookup;
