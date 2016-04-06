@@ -22,15 +22,15 @@ public class MockKSLookup implements KSLookup {
     }
 
     @Override
-    public boolean isKSManaged(String organisationNumber) {
-        return orgNumberstoreplaceWithKS.contains(organisationNumber);
+    public boolean isKSManaged(String organizationNumber) {
+        return orgNumberstoreplaceWithKS.contains(organizationNumber);
     }
 
     @Override
-    public String mapOrganisationNumber(String organisatioNumber) {
-        if (isKSManaged(organisatioNumber)) {
+    public String mapOrganizationNumber(String organizationNumber) {
+        if (isKSManaged(organizationNumber)) {
             return KS_ORGNR;
         } else
-            return organisatioNumber;
+            return organizationNumber;
     }
 }

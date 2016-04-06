@@ -10,6 +10,9 @@ import no.difi.vefa.peppol.security.api.PeppolSecurityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * See configuraion beans for beans that might be injected as LookupClient and TrasnportProfile
+ */
 @Component
 public class ELMALookupService {
 

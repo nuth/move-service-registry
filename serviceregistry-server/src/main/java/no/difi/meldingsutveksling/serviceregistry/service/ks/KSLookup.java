@@ -4,16 +4,16 @@ package no.difi.meldingsutveksling.serviceregistry.service.ks;
 public interface KSLookup {
 
     /**
-     * @param organisationNumber the organisation number
+     * @param organizationNumber the organisation number
      * @return true if this organisation is managed by KS
      */
-    boolean isKSManaged(String organisationNumber);
+    boolean isKSManaged(String organizationNumber);
 
     /**
-     * Convenience method to map organisation numbers to KS's main number
+     * Convenience method to map any organisation numbers to KS's main number
      *
-     * @param organisatioNumberthe organisation number
+     * @param organizationNumber the organisation number
      * @return The organisation number of KS if the given organisation is managed by it.
      */
-    String mapOrganisationNumber(String organisatioNumber);
+    String mapOrganizationNumber(String organizationNumber);
 }

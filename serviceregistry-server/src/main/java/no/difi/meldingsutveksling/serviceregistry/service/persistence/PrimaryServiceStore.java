@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * In memory storage of what organisation that should use what service for
- * transport (post virksomhet / edu). Todo: Write a persistant version of this for staging
+ * transport (post virksomhet / edu etc).
  */
 @Profile({"dev", "itest", "systest", "staging"})
 @Component

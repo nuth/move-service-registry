@@ -11,6 +11,7 @@ import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertServi
 import no.difi.meldingsutveksling.serviceregistry.servicerecord.EDUServiceRecord;
 import no.difi.meldingsutveksling.serviceregistry.servicerecord.PostVirksomhetServiceRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,9 @@ public class OrganizationController {
     private PrimaryServiceStore store;
 
     @Autowired
+    private Environment environment;
+
+    @Autowired
     public OrganizationController(VirkSertService virkSertService, ELMALookupService elmaLookupSerice, KSLookup ksLookup, PrimaryServiceStore store) {
         this.virkSertService = virkSertService;
         this.elmaLookupSerice = elmaLookupSerice;
@@ -43,8 +47,8 @@ public class OrganizationController {
         ServiceIdentifier identifier = store.getPrimaryServiceIdentifier(orgnr);
         final OrganizationInfo info = new OrganizationInfo(orgnr, identifier);
         org.setInfo(info);
-        org.addServiceRecord(new EDUServiceRecord(virkSertService, elmaLookupSerice, orgnr));
-        org.addServiceRecord(new PostVirksomhetServiceRecord(virkSertService, orgnr));
+        org.addServiceRecord(new EDUServiceRecord(environment, virkSertService, elmaLookupSerice, orgnr));
+        org.addServiceRecord(new PostVirksomhetServiceRecord(environment, virkSertService, orgnr));
         OrganizationResource organizationRes = new OrganizationResource(org);
         return new ResponseEntity<>(organizationRes, HttpStatus.OK);
     }

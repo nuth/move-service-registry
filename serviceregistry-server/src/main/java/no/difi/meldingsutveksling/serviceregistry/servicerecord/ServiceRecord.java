@@ -1,23 +1,32 @@
 package no.difi.meldingsutveksling.serviceregistry.servicerecord;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import no.difi.meldingsutveksling.serviceregistry.ResourceNotFoundException;
 import no.difi.meldingsutveksling.serviceregistry.model.ServiceIdentifier;
+import no.difi.meldingsutveksling.serviceregistry.service.virksert.CertificateToString;
+import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
+import no.difi.virksert.client.VirksertClientException;
+import org.springframework.core.env.Environment;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.security.cert.Certificate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class ServiceRecord implements Serializable {
 
+
+    protected Environment environment;
+
+    private VirkSertService virkSertService;
     private ServiceIdentifier serviceIdentifier;
     private String organisationNumber;
 
-    public ServiceRecord(ServiceIdentifier serviceIdentifier, String organisationNumber) {
+    public ServiceRecord(Environment e, VirkSertService virkSertService, ServiceIdentifier serviceIdentifier, String organisationNumber) {
         this.organisationNumber = organisationNumber;
         this.serviceIdentifier = serviceIdentifier;
-    }
-
-    public ServiceRecord() {
+        this.virkSertService = virkSertService;
+        this.environment = e;
     }
 
     public String getOrganisationNumber() {
@@ -28,7 +37,6 @@ public abstract class ServiceRecord implements Serializable {
         this.organisationNumber = organisationNumber;
     }
 
-    public abstract String getX509Certificate();
 
     public abstract String getEndPointURL();
 
@@ -40,6 +48,14 @@ public abstract class ServiceRecord implements Serializable {
         this.serviceIdentifier = serviceIdentifier;
     }
 
+    public String getX509Certificate() {
+        try {
+            Certificate c = virkSertService.getCertificate(getOrganisationNumber());
+            return CertificateToString.toString(c);
+        } catch (VirksertClientException e) {
+            throw new ResourceNotFoundException(e);
+        }
+    }
 
     @Override
     public String toString() {
