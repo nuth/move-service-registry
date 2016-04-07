@@ -18,8 +18,6 @@ import org.springframework.core.env.Environment;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
