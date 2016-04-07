@@ -65,3 +65,21 @@ copy the URL directly into a Browser of REST client
       }
     ```
 
+# Depenencies
+
+Please note, as of 7.4.2016:
+To build this module you need to have the following non public modules in your local maven repository
+
+```xml
+          <dependency>
+              <groupId>no.difi.virksert</groupId>
+              <artifactId>virksert-common</artifactId>
+              <version>1.0-SNAPSHOT</version>
+          </dependency>
+          <dependency>
+              <groupId>no.difi.virksert</groupId>
+              <artifactId>virksert-client</artifactId>
+              <version>1.0-SNAPSHOT</version>
+          </dependency>
+```
+

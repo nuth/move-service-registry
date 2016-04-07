@@ -11,7 +11,7 @@ import static no.difi.meldingsutveksling.serviceregistry.model.ServiceIdentifier
 
 public class EDUServiceRecord extends ServiceRecord {
 
-    public static final String NORWAY_PREFIX = "9908:";
+    private static final String NORWAY_PREFIX = "9908:";
     private ELMALookupService elmaLookupService;
 
     public EDUServiceRecord(Environment environment, VirkSertService virkSertService, ELMALookupService elmaLookupService, String orgnr) {
