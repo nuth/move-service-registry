@@ -17,10 +17,10 @@ public abstract class ServiceRecord implements Serializable {
 
 
     protected Environment environment;
+    protected String organisationNumber;
 
     private VirkSertService virkSertService;
     private ServiceIdentifier serviceIdentifier;
-    private String organisationNumber;
 
     public ServiceRecord(Environment e, VirkSertService virkSertService, ServiceIdentifier serviceIdentifier, String organisationNumber) {
         this.organisationNumber = organisationNumber;

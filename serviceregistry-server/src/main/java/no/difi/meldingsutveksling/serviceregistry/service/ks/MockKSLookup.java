@@ -7,18 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Change this when a lookup service is available for KS
+ * Remove this when a lookup service is available for KS,
+ * naive implementation to be replaced by a persistent solution
  */
 @Component
-@Profile({"dev","systest","itest","staging"})
+@Profile({"dev", "systest", "itest", "staging"})
 public class MockKSLookup implements KSLookup {
 
-    private static final String KS_ORGNR = "910076787";
+    public static final String KS_ORGNR = "910076787";
+    public static final String KS_MANAGED_1 = "910951688";
+    public static final String KS_MANAGED_2 = "910076787";
+
     private static List<String> orgNumberstoreplaceWithKS = new ArrayList<>();
 
     static {
-        orgNumberstoreplaceWithKS.add("910076787");
-        orgNumberstoreplaceWithKS.add("910951688");
+        orgNumberstoreplaceWithKS.add(KS_MANAGED_1);
+        orgNumberstoreplaceWithKS.add(KS_MANAGED_2);
     }
 
     @Override

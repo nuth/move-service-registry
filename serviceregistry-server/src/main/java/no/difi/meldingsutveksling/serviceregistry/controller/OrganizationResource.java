@@ -16,7 +16,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class OrganizationResource extends ResourceSupport {
 
     private List<ServiceRecordResource> serviceRecords;
-    private OrganizationInfo record;
     private Organization organization;
 
 
