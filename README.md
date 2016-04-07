@@ -64,7 +64,7 @@ copy the URL directly into a Browser of REST client
       }
 ```
 
-# Current implementation limitatiokns
+# Current implementation limitations
 
 * The organisations that are managed by KS is hard coded in lack of a cental lookup service, the managed organsations are 910951688 and 910076787. A new Implementation of the KSLookup interface can be created when- and if a  central service becomes available.    
 * The persistent store for keeping how organisations want to receive messages (primary service) is kept in-memory at (as a map) the moment. This functionality might not be relevant for a production scenario - so very little effort went into it.  
