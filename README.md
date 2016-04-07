@@ -2,9 +2,8 @@
 
 The service registry component (SR) is a component designed to run centralized, and has the follwing main features
 
-* It Creates a single network address participants need to access. This simplifies firewall configuration.
-* It enable organisations to manage messaging for others. The SR component can return the organization number and certificate for a third party for services.
-* It enables organisation number swapping. When a lookup on an organisation is done, the organisaiton number may be swapped out for some services
+* It Creates a single network address participants need to access. This simplifies firewall configuration
+* It enable organisations to manage messaging for others. The SR component can return the organization number and certificate for a third party for services
 
 ## Example request
 
@@ -63,7 +62,12 @@ copy the URL directly into a Browser of REST client
           "href": "http://localhost:8080/organization/primary?orgnr=986186999&serviceidentifier=POST_VIRKSOMHET"
         }
       }
-    ```
+```
+
+# Current implementation limitations
+
+* The organisations that are managed by KS is hard coded in lack of a cental lookup service, the managed organsations are 910951688 and 910076787. A new Implementation of the KSLookup interface can be created when- and if a  central service becomes available.    
+* The persistent store for keeping how organisations want to receive messages (primary service) is kept in-memory at (as a map) the moment. This functionality might not be relevant for a production scenario - so very little effort went into it.  
 
 # Depenencies
 
