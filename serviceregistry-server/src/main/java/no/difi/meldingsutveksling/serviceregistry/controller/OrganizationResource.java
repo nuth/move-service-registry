@@ -18,7 +18,6 @@ public class OrganizationResource extends ResourceSupport {
     private List<ServiceRecordResource> serviceRecords;
     private Organization organization;
 
-
     /**
      * Creates a resource object that will be returned to the REST client, based the the domain object
      *
@@ -48,7 +47,6 @@ public class OrganizationResource extends ResourceSupport {
     public OrganizationInfo getInfoRecord() {
         return organization.getInfo();
     }
-
 
 }
 
