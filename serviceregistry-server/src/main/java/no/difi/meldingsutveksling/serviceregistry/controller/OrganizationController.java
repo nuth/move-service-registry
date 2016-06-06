@@ -4,6 +4,7 @@ package no.difi.meldingsutveksling.serviceregistry.controller;
 import no.difi.meldingsutveksling.serviceregistry.model.OrganizationInfo;
 import no.difi.meldingsutveksling.serviceregistry.model.Organization;
 import no.difi.meldingsutveksling.serviceregistry.model.ServiceIdentifier;
+import no.difi.meldingsutveksling.serviceregistry.service.brreg.BrregService;
 import no.difi.meldingsutveksling.serviceregistry.service.elma.ELMALookupService;
 import no.difi.meldingsutveksling.serviceregistry.service.ks.KSLookup;
 import no.difi.meldingsutveksling.serviceregistry.service.persistence.PrimaryServiceStore;
@@ -25,6 +26,7 @@ public class OrganizationController {
 
     private VirkSertService virkSertService;
     private ELMALookupService elmaLookupSerice;
+    private BrregService brregService;
     private KSLookup ksLookup;
     private PrimaryServiceStore store;
 
@@ -32,9 +34,10 @@ public class OrganizationController {
     private Environment environment;
 
     @Autowired
-    public OrganizationController(VirkSertService virkSertService, ELMALookupService elmaLookupSerice, KSLookup ksLookup, PrimaryServiceStore store) {
+    public OrganizationController(VirkSertService virkSertService, ELMALookupService elmaLookupSerice, KSLookup ksLookup, PrimaryServiceStore store, BrregService brregService) {
         this.virkSertService = virkSertService;
         this.elmaLookupSerice = elmaLookupSerice;
+        this.brregService = brregService;
         this.ksLookup = ksLookup;
         this.store = store;
     }
@@ -45,7 +48,8 @@ public class OrganizationController {
 
         Organization org = new Organization();
         ServiceIdentifier identifier = store.getPrimaryServiceIdentifier(orgnr);
-        final OrganizationInfo info = new OrganizationInfo(orgnr, identifier);
+        String orgName = brregService.getOrgName(orgnr);
+        final OrganizationInfo info = new OrganizationInfo(orgnr, orgName, identifier);
         org.setInfo(info);
         org.addServiceRecord(new EDUServiceRecord(environment, virkSertService, elmaLookupSerice, ksLookup, orgnr));
         org.addServiceRecord(new PostVirksomhetServiceRecord(environment, virkSertService, orgnr));
