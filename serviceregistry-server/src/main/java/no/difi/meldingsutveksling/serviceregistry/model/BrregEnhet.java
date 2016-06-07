@@ -27,7 +27,7 @@ public class BrregEnhet {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("orgNr", this.organisasjonsnummer)
+                .add("organisasjonsnummer", this.organisasjonsnummer)
                 .add("navn", this.navn)
                 .toString();
     }

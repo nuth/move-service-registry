@@ -11,16 +11,19 @@ public class BrregServiceTest {
 
     @Test
     public void getOrgNameTest() {
+        String orgNavn = "DIREKTORATET FOR FORVALTNING OG IKT";
+        int orgNr = 991825827;
+
         BrregEnhet enhet = new BrregEnhet();
-        enhet.setOrganisasjonsnummer(991825827);
-        enhet.setNavn("DIREKTORATET FOR FORVALTNING OG IKT");
+        enhet.setOrganisasjonsnummer(orgNr);
+        enhet.setNavn(orgNavn);
 
         BrregClientImpl brregClientMock = Mockito.mock(BrregClientImpl.class);
         Mockito.when(brregClientMock.getBrregEnhetByOrgnr(Mockito.anyString())).thenReturn(null);
-        Mockito.when(brregClientMock.getBrregEnhetByOrgnr("991825827")).thenReturn(enhet);
+        Mockito.when(brregClientMock.getBrregEnhetByOrgnr(String.valueOf(orgNr))).thenReturn(enhet);
 
         BrregService brregService = new BrregService(brregClientMock);
-        assertEquals("DIREKTORATET FOR FORVALTNING OG IKT", brregService.getOrgName("991825827"));
+        assertEquals(orgNavn, brregService.getOrgName(String.valueOf(orgNr)));
         assertEquals("", brregService.getOrgName("123"));
     }
 }
