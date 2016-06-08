@@ -6,12 +6,14 @@ public class OrganizationInfo implements Serializable {
 
     private ServiceIdentifier primaryServiceIdentifier;
     private String organisationNumber;
+    private String organizationName;
 
     public OrganizationInfo() {
     }
 
-    public OrganizationInfo(String organisationNumber, ServiceIdentifier primaryServiceIdentifier) {
+    public OrganizationInfo(String organisationNumber, String organizationName, ServiceIdentifier primaryServiceIdentifier) {
         this.organisationNumber = organisationNumber;
+        this.organizationName = organizationName;
         this.primaryServiceIdentifier = primaryServiceIdentifier;
     }
 
@@ -29,6 +31,14 @@ public class OrganizationInfo implements Serializable {
 
     public void setOrganisationNumber(String organisationNumber) {
         this.organisationNumber = organisationNumber;
+    }
+
+    public String getOrganizationName() {
+        return this.organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 }
 
