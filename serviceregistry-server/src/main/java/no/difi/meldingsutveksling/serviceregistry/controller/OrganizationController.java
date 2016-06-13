@@ -47,7 +47,7 @@ public class OrganizationController {
     public HttpEntity<OrganizationResource> organisation(@PathVariable("orgnr") String orgnr) {
 
         Organization org = new Organization();
-        ServiceIdentifier identifier = store.getPrimaryServiceIdentifier(orgnr);
+        ServiceIdentifier identifier = store.getPrimaryOverride(orgnr);
         String orgName = brregService.getOrgName(orgnr);
         final OrganizationInfo info = new OrganizationInfo(orgnr, orgName, identifier);
         org.setInfo(info);
@@ -59,7 +59,7 @@ public class OrganizationController {
 
     @RequestMapping("/primary")
     public ResponseEntity setPrimary(@RequestParam("orgnr") String orgnr, @RequestParam("serviceidentifier") String serviceIdentifier) {
-        store.setPrimaryServiceIdentifier(orgnr, ServiceIdentifier.valueOf(serviceIdentifier));
+        store.setPrimaryOverride(orgnr, ServiceIdentifier.valueOf(serviceIdentifier));
         return new ResponseEntity(HttpStatus.OK);
     }
 }
