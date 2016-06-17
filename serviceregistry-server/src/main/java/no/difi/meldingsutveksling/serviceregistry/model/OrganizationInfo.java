@@ -1,20 +1,23 @@
 package no.difi.meldingsutveksling.serviceregistry.model;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 public class OrganizationInfo implements Serializable {
 
     private ServiceIdentifier primaryServiceIdentifier;
     private String organisationNumber;
     private String organizationName;
+    private OrganizationType organizationType;
 
     public OrganizationInfo() {
     }
 
-    public OrganizationInfo(String organisationNumber, String organizationName, ServiceIdentifier primaryServiceIdentifier) {
+    public OrganizationInfo(ServiceIdentifier primaryServiceIdentifier, String organisationNumber, String organizationName, OrganizationType organizationType) {
+        this.primaryServiceIdentifier = primaryServiceIdentifier;
         this.organisationNumber = organisationNumber;
         this.organizationName = organizationName;
-        this.primaryServiceIdentifier = primaryServiceIdentifier;
+        this.organizationType = organizationType;
     }
 
     public ServiceIdentifier getPrimaryServiceIdentifier() {
@@ -40,6 +43,38 @@ public class OrganizationInfo implements Serializable {
     public void setOrganizationName(String organizationName) {
         this.organizationName = organizationName;
     }
+
+    public OrganizationType getOrganizationType() {
+        return organizationType;
+    }
+
+    public static class Builder {
+        private OrganizationInfo organizationInfo = new OrganizationInfo();
+
+        public Builder() {}
+
+        public OrganizationInfo build() {
+            return organizationInfo;
+        }
+
+        public Builder withPrimaryServiceIdentifier(ServiceIdentifier primaryServiceIdentifier) {
+            organizationInfo.setPrimaryServiceIdentifier(primaryServiceIdentifier);
+            return this;
+        }
+
+        public Builder withOrganizationNumber(String organisationNumber) {
+            organizationInfo.setOrganisationNumber(organisationNumber);
+            return this;
+        }
+
+        public Builder withOrganizationName(String organizationName) {
+            organizationInfo.setOrganizationName(organizationName);
+            return this;
+        }
+
+        public Builder setOrganizationType(OrganizationType organizationType) {
+            organizationInfo.organizationType = organizationType;
+            return this;
+        }
+    }
 }
-
-
