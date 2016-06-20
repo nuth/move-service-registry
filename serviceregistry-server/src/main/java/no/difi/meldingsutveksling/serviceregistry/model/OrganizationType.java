@@ -2,17 +2,24 @@ package no.difi.meldingsutveksling.serviceregistry.model;
 
 import com.google.common.base.Objects;
 
+import java.io.Serializable;
+
 /**
  * Represents an organization according to BRREG
  *
  * See http://hotell.difi.no/?dataset=brreg/organisasjonsform
  *
  */
-public class OrganizationType {
+public class OrganizationType implements Serializable {
     private String name;
     private String akronym;
 
-    public OrganizationType(String name, String akronym) {
+    /**
+     * Constructs new instance
+     * @param name for instance Organisasjonsledd
+     * @param akronym for instance ORGL
+     */
+    OrganizationType(String name, String akronym) {
         this.name = name;
         this.akronym = akronym;
     }
@@ -37,4 +44,9 @@ public class OrganizationType {
     public int hashCode() {
         return Objects.hashCode(akronym);
     }
+
+    public static OrganizationType from(String organisasjonsform) {
+        return OrganizationTypes.all.get(organisasjonsform);
+    }
+
 }

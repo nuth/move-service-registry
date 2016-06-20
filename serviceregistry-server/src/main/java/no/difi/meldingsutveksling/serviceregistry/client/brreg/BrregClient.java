@@ -2,6 +2,9 @@ package no.difi.meldingsutveksling.serviceregistry.client.brreg;
 
 import no.difi.meldingsutveksling.serviceregistry.model.BrregEnhet;
 
+import java.util.Optional;
+
+@FunctionalInterface
 public interface BrregClient {
-    BrregEnhet getBrregEnhetByOrgnr(String orgnr);
+    Optional<BrregEnhet> getBrregEnhetByOrgnr(String orgnr);
 }
