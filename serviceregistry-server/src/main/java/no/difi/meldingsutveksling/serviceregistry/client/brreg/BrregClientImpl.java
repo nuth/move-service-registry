@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.Optional;
 
 /**
  * Client for "Enhetsregisteret" at data.brreg.no
@@ -19,19 +20,28 @@ public class BrregClientImpl implements BrregClient {
 
     private URI uri;
 
+    /**
+     * Creates a client configured to connect to http://data.brreg.no/
+     */
     public BrregClientImpl() {
         uri = URI.create("http://data.brreg.no/");
     }
 
-    public BrregEnhet getBrregEnhetByOrgnr(String orgnr) {
+    /**
+     * Lookup an organization in BRREG
+     * @param orgnr organization number to lookup
+     * @return BRREG enhet or empty if none is found
+     */
+    @Override
+    public Optional<BrregEnhet> getBrregEnhetByOrgnr(String orgnr) {
         URI currentURI = uri.resolve(String.format("enhetsregisteret/enhet/%s.json", orgnr));
         RestTemplate rt = new RestTemplate();
         BrregEnhet enhet= null;
         try {
             enhet= rt.getForObject(currentURI, BrregEnhet.class);
         } catch (Exception e) {
-            log.error("Failed to retrieve entity. "+e.getMessage());
+            log.error(String.format("Could not find entity for orgNr %s.", orgnr), e);
         }
-        return enhet;
+        return Optional.ofNullable(enhet);
     }
 }

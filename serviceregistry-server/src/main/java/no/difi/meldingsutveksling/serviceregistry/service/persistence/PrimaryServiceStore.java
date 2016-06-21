@@ -17,11 +17,11 @@ public class PrimaryServiceStore {
 
     private static final Map<String, ServiceIdentifier> primaryStore = new HashMap<>();
 
-    public ServiceIdentifier getPrimaryServiceIdentifier(String orgNumber) {
+    public ServiceIdentifier getPrimaryOverride(String orgNumber) {
         return primaryStore.get(orgNumber);
     }
 
-    public void setPrimaryServiceIdentifier(String orgNumber, ServiceIdentifier serviceIdentifier) {
+    public void setPrimaryOverride(String orgNumber, ServiceIdentifier serviceIdentifier) {
         primaryStore.put(orgNumber, serviceIdentifier);
     }
 }
