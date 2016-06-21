@@ -12,9 +12,10 @@ import java.util.Set;
 public class OrganizationTypes {
     private static final OrganizationType AS = new OrganizationType("Aksjeselskap", "AS");
     public static final OrganizationType ORGL = new OrganizationType("Organisasjonsledd", "ORGL");
+
     static final Map<String, OrganizationType> all =
-            ImmutableMap.<String, OrganizationType>builder().put(AS.getAkronym(), AS)
-                    .put(ORGL.getAkronym(), ORGL).build();
+            ImmutableMap.<String, OrganizationType>builder().put(AS.getAcronym(), AS)
+                    .put(ORGL.getAcronym(), ORGL).build();
 
     /**
      * @return collection of all known private organization types

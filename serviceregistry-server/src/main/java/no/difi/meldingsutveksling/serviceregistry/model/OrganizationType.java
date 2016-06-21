@@ -12,24 +12,24 @@ import java.io.Serializable;
  */
 public class OrganizationType implements Serializable {
     private String name;
-    private String akronym;
+    private String acronym;
 
     /**
      * Constructs new instance
      * @param name for instance Organisasjonsledd
-     * @param akronym for instance ORGL
+     * @param acronym for instance ORGL
      */
-    OrganizationType(String name, String akronym) {
+    OrganizationType(String name, String acronym) {
         this.name = name;
-        this.akronym = akronym;
+        this.acronym = acronym;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getAkronym() {
-        return akronym;
+    public String getAcronym() {
+        return acronym;
     }
 
     @Override
@@ -37,12 +37,12 @@ public class OrganizationType implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrganizationType that = (OrganizationType) o;
-        return Objects.equal(akronym, that.akronym);
+        return Objects.equal(acronym, that.acronym);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(akronym);
+        return Objects.hashCode(acronym);
     }
 
     public static OrganizationType from(String organisasjonsform) {

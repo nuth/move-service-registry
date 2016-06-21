@@ -3,7 +3,6 @@ package no.difi.meldingsutveksling.serviceregistry.client.brreg;
 import no.difi.meldingsutveksling.serviceregistry.model.BrregEnhet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -14,7 +13,6 @@ import java.util.Optional;
  *
  * Created by kons-mwa on 06.06.2016.
  */
-@Component
 public class BrregClientImpl implements BrregClient {
     private static Logger log = LoggerFactory.getLogger(BrregClientImpl.class);
 
@@ -22,9 +20,10 @@ public class BrregClientImpl implements BrregClient {
 
     /**
      * Creates a client configured to connect to http://data.brreg.no/
+     * @param uri
      */
-    public BrregClientImpl() {
-        uri = URI.create("http://data.brreg.no/");
+    public BrregClientImpl(URI uri) {
+        this.uri = uri;
     }
 
     /**
