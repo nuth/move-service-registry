@@ -6,10 +6,10 @@ import no.difi.meldingsutveksling.serviceregistry.model.BrregEnhet;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class TestmiljøEnheter {
+public class TestEnvironmentEnheter {
     private final BrregEnhet[] enheter;
 
-    public TestmiljøEnheter() {
+    public TestEnvironmentEnheter() {
         enheter = new BrregEnhet[]{
                 createBrregEnhet("Biristrand og Tjøtta", "ORGL", "910075918"),
                 createBrregEnhet("Lote og Årviksand", "ORGL", "910077473"),

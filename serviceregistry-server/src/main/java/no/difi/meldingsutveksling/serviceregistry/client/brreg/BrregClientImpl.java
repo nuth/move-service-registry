@@ -20,9 +20,10 @@ public class BrregClientImpl implements BrregClient {
 
     /**
      * Creates a client configured to connect to http://data.brreg.no/
+     * @param uri
      */
-    public BrregClientImpl() {
-        uri = URI.create("http://data.brreg.no/");
+    public BrregClientImpl(URI uri) {
+        this.uri = uri;
     }
 
     /**
