@@ -26,6 +26,6 @@ public class BrregService {
     public OrganizationInfo getOrganizationInfo(String orgNr) {
         Optional<BrregEnhet> enhet = brregClient.getBrregEnhetByOrgnr(orgNr);
 
-        return enhet.map(x -> new OrganizationInfo(null, orgNr, x.getNavn().orElse(""), OrganizationType.from(x.getOrganisasjonsform()))).orElse(new OrganizationInfo());
+        return enhet.map(x -> new OrganizationInfo(null, orgNr, x.getNavn().orElse(""), OrganizationType.from(x.getOrganisasjonsform().orElse("")))).orElse(new OrganizationInfo());
     }
 }

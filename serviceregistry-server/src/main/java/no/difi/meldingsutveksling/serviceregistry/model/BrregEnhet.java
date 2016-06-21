@@ -15,8 +15,8 @@ public class BrregEnhet {
     String organisasjonsform;
 
 
-    public String getOrganisasjonsnummer() {
-        return organisasjonsnummer;
+    public Optional<String> getOrganisasjonsnummer() {
+        return Optional.of(organisasjonsnummer);
     }
 
     public void setOrganisasjonsnummer(String organisasjonsnummer) {
@@ -31,8 +31,8 @@ public class BrregEnhet {
         this.navn = navn;
     }
 
-    public String getOrganisasjonsform() {
-        return organisasjonsform;
+    public Optional<String> getOrganisasjonsform() {
+        return Optional.of(organisasjonsform);
     }
 
     public void setOrganisasjonsform(String organisasjonsform) {
