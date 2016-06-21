@@ -31,8 +31,8 @@ public class TestEnvironmentEnheter {
         return biristrand;
     }
 
-    public ImmutableMap<String, Optional<BrregEnhet>> getTestMiljøEnheter() {
-        ImmutableMap.Builder<String, Optional<BrregEnhet>> builder = ImmutableMap.builder();
+    public ImmutableMap<Optional<String>, Optional<BrregEnhet>> getTestMiljøEnheter() {
+        ImmutableMap.Builder<Optional<String>, Optional<BrregEnhet>> builder = ImmutableMap.builder();
         Arrays.stream(enheter).forEach(e -> builder.put(e.getOrganisasjonsnummer(), Optional.of(e)));
         return builder.build();
     }
