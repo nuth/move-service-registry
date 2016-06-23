@@ -15,7 +15,7 @@ import java.util.Optional;
 public class BrregDevConfig {
     @Bean
     BrregClient brregClient() {
-        Map<Optional<String>, Optional<BrregEnhet>> brregMock = new TestEnvironmentEnheter().getTestMiljøEnheter();
+        Map<String, Optional<BrregEnhet>> brregMock = new TestEnvironmentEnheter().getTestMiljøEnheter();
 
         return orgnr -> brregMock.getOrDefault(orgnr, Optional.empty());
     }

@@ -9,7 +9,6 @@ import no.difi.virksert.client.VirksertClientException;
 import org.springframework.core.env.Environment;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.security.cert.Certificate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -48,7 +47,7 @@ public abstract class ServiceRecord implements Serializable {
         this.serviceIdentifier = serviceIdentifier;
     }
 
-    public String getX509Certificate() {
+    public String getPemCertificate() {
         try {
             Certificate c = virkSertService.getCertificate(getOrganisationNumber());
             return CertificateToString.toString(c);
@@ -62,7 +61,7 @@ public abstract class ServiceRecord implements Serializable {
         return "ServiceRecord{" +
                 "serviceIdentifier='" + serviceIdentifier + '\'' +
                 ", organisationNumber='" + organisationNumber + '\'' +
-                ", x509Certificate='" + getX509Certificate() + '\'' +
+                ", pemCertificate='" + getPemCertificate() + '\'' +
                 ", endPointURL='" + getEndPointURL().toString() + '\'' +
                 '}';
     }
