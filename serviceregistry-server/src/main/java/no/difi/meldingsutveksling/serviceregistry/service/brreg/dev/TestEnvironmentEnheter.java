@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import no.difi.meldingsutveksling.serviceregistry.model.BrregEnhet;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
 
 public class TestEnvironmentEnheter {
@@ -31,9 +32,9 @@ public class TestEnvironmentEnheter {
         return biristrand;
     }
 
-    public ImmutableMap<Optional<String>, Optional<BrregEnhet>> getTestMiljøEnheter() {
-        ImmutableMap.Builder<Optional<String>, Optional<BrregEnhet>> builder = ImmutableMap.builder();
-        Arrays.stream(enheter).forEach(e -> builder.put(e.getOrganisasjonsnummer(), Optional.of(e)));
+    public Map<String, Optional<BrregEnhet>> getTestMiljøEnheter() {
+        ImmutableMap.Builder<String, Optional<BrregEnhet>> builder = ImmutableMap.builder();
+        Arrays.stream(enheter).forEach(e -> builder.put(e.getOrganisasjonsnummer().get(), Optional.of(e)));
         return builder.build();
     }
 }
