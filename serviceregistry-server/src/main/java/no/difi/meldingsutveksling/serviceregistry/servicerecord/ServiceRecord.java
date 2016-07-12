@@ -20,6 +20,7 @@ public abstract class ServiceRecord implements Serializable {
 
     private VirkSertService virkSertService;
     private ServiceIdentifier serviceIdentifier;
+    protected String endpointUrl;
 
     public ServiceRecord(Environment e, VirkSertService virkSertService, ServiceIdentifier serviceIdentifier, String organisationNumber) {
         this.organisationNumber = organisationNumber;
@@ -62,7 +63,7 @@ public abstract class ServiceRecord implements Serializable {
                 "serviceIdentifier='" + serviceIdentifier + '\'' +
                 ", organisationNumber='" + organisationNumber + '\'' +
                 ", pemCertificate='" + getPemCertificate() + '\'' +
-                ", endPointURL='" + getEndPointURL().toString() + '\'' +
+                ", endPointURL='" + getEndPointURL() + '\'' +
                 '}';
     }
 }
