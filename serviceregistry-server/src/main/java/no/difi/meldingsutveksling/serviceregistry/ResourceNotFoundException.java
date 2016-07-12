@@ -1,6 +1,7 @@
 package no.difi.meldingsutveksling.serviceregistry;
 
 
+import no.difi.vefa.peppol.common.lang.PeppolException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -8,5 +9,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(Throwable cause) {
         super(cause);
+    }
+
+    public ResourceNotFoundException(String message, PeppolException cause) {
+        super(message, cause);
     }
 }

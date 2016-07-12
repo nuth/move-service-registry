@@ -4,6 +4,7 @@ import no.difi.meldingsutveksling.serviceregistry.service.elma.ELMALookupService
 import no.difi.meldingsutveksling.serviceregistry.service.ks.KSLookup;
 import no.difi.meldingsutveksling.serviceregistry.service.ks.MockKSLookup;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
+import no.difi.vefa.peppol.common.lang.EndpointNotFoundException;
 import no.difi.vefa.peppol.common.model.Endpoint;
 import no.difi.vefa.peppol.lookup.api.LookupException;
 import org.junit.After;
@@ -56,7 +57,7 @@ public class ServiceRecordTests {
     }
 
     @Test
-    public void testShouldGetEndPointFromEDUServiceRecord() throws LookupException {
+    public void testShouldGetEndPointFromEDUServiceRecord() throws LookupException, EndpointNotFoundException {
         // The EDURecord should lookup the Endpoint Using ELMA
         eduServiceRecord.setOrganisationNumber(ORGNR);
         when(elmaLookupService.lookup("9908:" + ORGNR)).thenReturn(new Endpoint(null, null, ENDPOINT_URL, null));

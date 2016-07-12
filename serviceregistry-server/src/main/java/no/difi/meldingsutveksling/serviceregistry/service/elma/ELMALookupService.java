@@ -1,6 +1,7 @@
 package no.difi.meldingsutveksling.serviceregistry.service.elma;
 
 import no.difi.meldingsutveksling.serviceregistry.ServiceRegistryException;
+import no.difi.meldingsutveksling.serviceregistry.exceptions.EndpointUrlNotFound;
 import no.difi.vefa.peppol.common.lang.EndpointNotFoundException;
 import no.difi.vefa.peppol.common.model.*;
 import no.difi.vefa.peppol.lookup.LookupClient;
@@ -28,14 +29,16 @@ public class ELMALookupService {
         this.transportProfile = transportProfile;
     }
 
-    public Endpoint lookup(String organisationNumber) throws LookupException {
+    public Endpoint lookup(String organisationNumber) {
         try {
             return lookupClient.getEndpoint(new ParticipantIdentifier(organisationNumber),
                     DOCUMENT_IDENTIFIER,
                     PROCESS_IDENTIFIER,
                     transportProfile);
-        } catch (PeppolSecurityException | EndpointNotFoundException e) {
+        } catch (PeppolSecurityException e) {
             throw new ServiceRegistryException(e);
+        } catch (LookupException | EndpointNotFoundException e) {
+            throw new EndpointUrlNotFound(String.format("Failed lookup through ELMA of %s", organisationNumber), e);
         }
     }
 }
