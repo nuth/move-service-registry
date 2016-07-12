@@ -1,6 +1,7 @@
 package no.difi.meldingsutveksling.serviceregistry.controller;
 
 
+import no.difi.meldingsutveksling.serviceregistry.CertificateNotFoundException;
 import no.difi.meldingsutveksling.serviceregistry.exceptions.EndpointUrlNotFound;
 import no.difi.meldingsutveksling.serviceregistry.model.Organization;
 import no.difi.meldingsutveksling.serviceregistry.model.OrganizationInfo;
@@ -31,10 +32,10 @@ import static no.difi.meldingsutveksling.serviceregistry.businesslogic.ServiceRe
 @RestController
 public class OrganizationController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
     private final ServiceRecordFactory serviceRecordFactory;
     private BrregService brregService;
     private PrimaryServiceStore store;
+    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
     @Autowired
     private Environment environment;
@@ -79,10 +80,16 @@ public class OrganizationController {
         return new ResponseEntity<>(organizationRes, HttpStatus.OK);
     }
 
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Could not find certificate for requested organization")
+    @ExceptionHandler(CertificateNotFoundException.class)
+    public void certificateNotFound(HttpServletRequest req, Exception e) {
+        logger.debug("Certificate not found for: " + req.getRequestURL().toString(), e);
+    }
+
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Could not find endpoint url for service of requested organization")
     @ExceptionHandler(EndpointUrlNotFound.class)
-    public void notFound(HttpServletRequest req, Exception e) {
-        logger.info(String.format("Endpoint not found for %s", req.getRequestURL()), e);
+    public void endpointNotFound(HttpServletRequest req, Exception e) {
+        logger.debug(String.format("Endpoint not found for %s", req.getRequestURL()), e);
     }
 
 

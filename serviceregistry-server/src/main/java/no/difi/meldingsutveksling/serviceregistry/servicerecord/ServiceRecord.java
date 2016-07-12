@@ -1,15 +1,10 @@
 package no.difi.meldingsutveksling.serviceregistry.servicerecord;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import no.difi.meldingsutveksling.serviceregistry.ResourceNotFoundException;
 import no.difi.meldingsutveksling.serviceregistry.model.ServiceIdentifier;
-import no.difi.meldingsutveksling.serviceregistry.service.virksert.CertificateToString;
-import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
-import no.difi.virksert.client.VirksertClientException;
 import org.springframework.core.env.Environment;
 
 import java.io.Serializable;
-import java.security.cert.Certificate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class ServiceRecord implements Serializable {
@@ -17,15 +12,14 @@ public abstract class ServiceRecord implements Serializable {
 
     protected Environment environment;
     protected String organisationNumber;
-
-    private VirkSertService virkSertService;
     private ServiceIdentifier serviceIdentifier;
     protected String endpointUrl;
+    protected String pemCertificate;
 
-    public ServiceRecord(Environment e, VirkSertService virkSertService, ServiceIdentifier serviceIdentifier, String organisationNumber) {
+    public ServiceRecord(Environment e, String pemCertificate, ServiceIdentifier serviceIdentifier, String organisationNumber) {
         this.organisationNumber = organisationNumber;
         this.serviceIdentifier = serviceIdentifier;
-        this.virkSertService = virkSertService;
+        this.pemCertificate = pemCertificate;
         this.environment = e;
     }
 
@@ -49,12 +43,7 @@ public abstract class ServiceRecord implements Serializable {
     }
 
     public String getPemCertificate() {
-        try {
-            Certificate c = virkSertService.getCertificate(getOrganisationNumber());
-            return CertificateToString.toString(c);
-        } catch (VirksertClientException e) {
-            throw new ResourceNotFoundException(e);
-        }
+        return pemCertificate;
     }
 
     @Override
