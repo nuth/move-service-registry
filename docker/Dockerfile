@@ -1,4 +1,4 @@
-FROM dervism/dockerjava:jre8
+FROM dervism/dockerjava:openjdk8
 MAINTAINER DIFI <espen.korra@difi.no>
 
 LABEL package="no.difi"
@@ -11,17 +11,6 @@ LABEL description="Direktoratet for forvaltning og IKT (Difi)"
 #
 
 EXPOSE 9099
-
-#
-# Install Java unlimited security policy
-#
-
-WORKDIR ${JAVA_HOME}/lib/security
-
-ADD security.zip ${JAVA_HOME}/lib/security
-
-RUN rm -rf local_policy.jar US_export_policy.jar && \
-    unzip security.zip
 
 #
 # Install application
