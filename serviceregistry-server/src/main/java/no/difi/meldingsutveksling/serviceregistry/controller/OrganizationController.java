@@ -1,6 +1,7 @@
 package no.difi.meldingsutveksling.serviceregistry.controller;
 
 
+import no.difi.meldingsutveksling.serviceregistry.CertificateNotFoundException;
 import no.difi.meldingsutveksling.serviceregistry.exceptions.EndpointUrlNotFound;
 import no.difi.meldingsutveksling.serviceregistry.model.Organization;
 import no.difi.meldingsutveksling.serviceregistry.model.OrganizationInfo;
@@ -11,6 +12,7 @@ import no.difi.meldingsutveksling.serviceregistry.service.ks.KSLookup;
 import no.difi.meldingsutveksling.serviceregistry.service.persistence.PrimaryServiceStore;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
 import no.difi.meldingsutveksling.serviceregistry.servicerecord.ServiceRecordFactory;
+import org.jboss.logging.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +33,10 @@ import static no.difi.meldingsutveksling.serviceregistry.businesslogic.ServiceRe
 @RestController
 public class OrganizationController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
     private final ServiceRecordFactory serviceRecordFactory;
     private BrregService brregService;
     private PrimaryServiceStore store;
+    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
     @Autowired
     private Environment environment;
@@ -62,7 +64,7 @@ public class OrganizationController {
     @RequestMapping("/{orgnr}")
     @ResponseBody
     public HttpEntity<OrganizationResource> organisation(@PathVariable("orgnr") String orgnr) {
-
+        MDC.put("orgnr", orgnr);
         Organization org = new Organization();
         ServiceIdentifier identifier = store.getPrimaryOverride(orgnr);
         OrganizationInfo organization = brregService.getOrganizationInfo(orgnr);
@@ -79,10 +81,16 @@ public class OrganizationController {
         return new ResponseEntity<>(organizationRes, HttpStatus.OK);
     }
 
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Could not find certificate for requested organization")
+    @ExceptionHandler(CertificateNotFoundException.class)
+    public void certificateNotFound(HttpServletRequest req, Exception e) {
+        logger.warn("Certificate not found for: " + req.getRequestURL().toString(), e);
+    }
+
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Could not find endpoint url for service of requested organization")
     @ExceptionHandler(EndpointUrlNotFound.class)
-    public void notFound(HttpServletRequest req, Exception e) {
-        logger.info(String.format("Endpoint not found for %s", req.getRequestURL()), e);
+    public void endpointNotFound(HttpServletRequest req, Exception e) {
+        logger.warn(String.format("Endpoint not found for %s", req.getRequestURL()), e);
     }
 
 

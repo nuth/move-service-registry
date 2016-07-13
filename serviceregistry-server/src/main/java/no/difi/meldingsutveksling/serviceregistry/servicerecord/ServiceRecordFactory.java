@@ -1,10 +1,15 @@
 package no.difi.meldingsutveksling.serviceregistry.servicerecord;
 
+import no.difi.meldingsutveksling.serviceregistry.CertificateNotFoundException;
 import no.difi.meldingsutveksling.serviceregistry.service.elma.ELMALookupService;
 import no.difi.meldingsutveksling.serviceregistry.service.ks.KSLookup;
+import no.difi.meldingsutveksling.serviceregistry.service.virksert.CertificateToString;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
 import no.difi.vefa.peppol.common.model.Endpoint;
+import no.difi.virksert.client.VirksertClientException;
 import org.springframework.core.env.Environment;
+
+import java.security.cert.Certificate;
 
 /**
  * Factory method class to create Service Records based on lookup endpoint urls and certificates corresponding to those
@@ -27,10 +32,20 @@ public class ServiceRecordFactory {
     public ServiceRecord createEduServiceRecord(String orgnr) {
         String finalOrgNumber = ksLookup.mapOrganizationNumber(orgnr);
         Endpoint ep = elmaLookupService.lookup(NORWAY_PREFIX + finalOrgNumber);
-        return new EDUServiceRecord(environment, virksertService, ep.getAddress(), orgnr);
+        String pemCertificate = lookupPemCertificate(finalOrgNumber);
+        return new EDUServiceRecord(environment, pemCertificate, ep.getAddress(), orgnr);
     }
 
     public ServiceRecord createPostVirksomhetServiceRecord(String orgnr) {
-        return new PostVirksomhetServiceRecord(environment, virksertService, orgnr);
+        return new PostVirksomhetServiceRecord(environment, lookupPemCertificate(orgnr), orgnr);
+    }
+
+    private String lookupPemCertificate(String orgnumber) {
+        try {
+            Certificate c = virksertService.getCertificate(orgnumber);
+            return CertificateToString.toString(c);
+        } catch (VirksertClientException e) {
+            throw new CertificateNotFoundException(String.format("Unable to find certificate for: %s", orgnumber), e);
+        }
     }
 }
