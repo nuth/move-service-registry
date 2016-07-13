@@ -12,6 +12,7 @@ import no.difi.meldingsutveksling.serviceregistry.service.ks.KSLookup;
 import no.difi.meldingsutveksling.serviceregistry.service.persistence.PrimaryServiceStore;
 import no.difi.meldingsutveksling.serviceregistry.service.virksert.VirkSertService;
 import no.difi.meldingsutveksling.serviceregistry.servicerecord.ServiceRecordFactory;
+import org.jboss.logging.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class OrganizationController {
     @RequestMapping("/{orgnr}")
     @ResponseBody
     public HttpEntity<OrganizationResource> organisation(@PathVariable("orgnr") String orgnr) {
-
+        MDC.put("orgnr", orgnr);
         Organization org = new Organization();
         ServiceIdentifier identifier = store.getPrimaryOverride(orgnr);
         OrganizationInfo organization = brregService.getOrganizationInfo(orgnr);

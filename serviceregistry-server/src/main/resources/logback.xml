@@ -4,14 +4,14 @@
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] [%X] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <charset>UTF-8</charset>
-            <pattern>%d [%thread] [%mdc] %-5level %logger{20} - %msg%n</pattern>
+            <pattern>%d [%thread] [%X] %-5level %logger{20} - %msg%n</pattern>
         </encoder>
         <file>${user.dir}/service-registry-logs/application.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
