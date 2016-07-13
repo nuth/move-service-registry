@@ -83,13 +83,13 @@ public class OrganizationController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Could not find certificate for requested organization")
     @ExceptionHandler(CertificateNotFoundException.class)
     public void certificateNotFound(HttpServletRequest req, Exception e) {
-        logger.debug("Certificate not found for: " + req.getRequestURL().toString(), e);
+        logger.warn("Certificate not found for: " + req.getRequestURL().toString(), e);
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Could not find endpoint url for service of requested organization")
     @ExceptionHandler(EndpointUrlNotFound.class)
     public void endpointNotFound(HttpServletRequest req, Exception e) {
-        logger.debug(String.format("Endpoint not found for %s", req.getRequestURL()), e);
+        logger.warn(String.format("Endpoint not found for %s", req.getRequestURL()), e);
     }
 
 
