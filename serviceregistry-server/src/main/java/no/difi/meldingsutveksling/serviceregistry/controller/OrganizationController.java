@@ -38,9 +38,6 @@ public class OrganizationController {
     private PrimaryServiceStore store;
     private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
-    @Autowired
-    private Environment environment;
-
     /**
      *
      * @param virkSertService used to retrieve organization certificates
@@ -50,7 +47,7 @@ public class OrganizationController {
      * @param brregService needed to lookup and retrieve organization information using an organization number
      */
     @Autowired
-    public OrganizationController(VirkSertService virkSertService, ELMALookupService elmaLookupSerice, KSLookup ksLookup, PrimaryServiceStore store, BrregService brregService) {
+    public OrganizationController(VirkSertService virkSertService, ELMALookupService elmaLookupSerice, KSLookup ksLookup, PrimaryServiceStore store, BrregService brregService, Environment environment) {
         this.brregService = brregService;
         this.store = store;
         this.serviceRecordFactory = new ServiceRecordFactory(environment, virkSertService, elmaLookupSerice, ksLookup);
