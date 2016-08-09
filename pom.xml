@@ -9,6 +9,14 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <repositories>
+        <repository>
+            <id>nexus-itest</id>
+            <name>Integrasjontest-miljø Nexus</name>
+            <url>http://integrasjonstest-miif.difi.local:8081/content/repositories/difi.meldingsutveksler</url>
+        </repository>
+    </repositories>
+
     <modules>
         <module>serviceregistry-server</module>
     </modules>
@@ -58,6 +66,5 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 </project>
